@@ -16,7 +16,14 @@ describe("Gilded Rose", function() {
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(9);
       expect(items[0].quality).toBe(19);
-    })
+    });
+
+    
+    it("quality not decreases below 0", function() {
+      gildedRose = new Shop([{ name: "test 1", sellIn: 0, quality: 0 }]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(0);
+    });
 
     it("if 1 day passes", function() {
       const items = gildedRose.updateQuality();
@@ -89,6 +96,5 @@ describe("Gilded Rose", function() {
 
       expect(items.reduce((max, item) => Math.max(max, item.quality), 0)).toBeLessThanOrEqual(50);
     });
-
   });
 });
