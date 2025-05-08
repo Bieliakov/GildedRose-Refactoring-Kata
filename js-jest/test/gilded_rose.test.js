@@ -105,7 +105,7 @@ describe("Gilded Rose", function() {
       gildedRose = new Shop([{ name: "Sulfuras, Hand of Ragnaros", sellIn: 1, quality: 80 }]);
     });
 
-    it("quality and sellIn will not change 1 day", function() {
+    it("quality and sellIn will not change", function() {
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(1);
       expect(items[0].quality).toBe(80);
@@ -169,6 +169,22 @@ describe("Gilded Rose", function() {
       }
 
       expect(items.reduce((max, item) => Math.max(max, item.quality), 0)).toBeLessThanOrEqual(50);
+    });
+  });
+
+  describe.skip("for conjured items ", function() {
+    it("double decrease quality", function() {
+      const gildedRose = new Shop([{ name: "Conjured Mana Cake", sellIn: 3, quality: 6 }]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].sellIn).toBe(2);
+      expect(items[0].quality).toBe(4);
+    });
+
+    
+    it("quality not decreases below 0", function() {
+      const gildedRose = new Shop([{ name: "Conjured Mana Cake", sellIn: 2, quality: 1 }]);
+      const items = gildedRose.updateQuality();
+      expect(items[0].quality).toBe(0);
     });
   });
 });
