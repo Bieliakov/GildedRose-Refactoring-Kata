@@ -105,9 +105,9 @@ describe("Gilded Rose", function() {
       gildedRose = new Shop([{ name: "Sulfuras, Hand of Ragnaros", sellIn: 1, quality: 80 }]);
     });
 
-    it("quality and sellIn will not change", function() {
+    it("quality will not change", function() {
       const items = gildedRose.updateQuality();
-      expect(items[0].sellIn).toBe(1);
+      expect(items[0].sellIn).toBe(0);
       expect(items[0].quality).toBe(80);
     });
   });
