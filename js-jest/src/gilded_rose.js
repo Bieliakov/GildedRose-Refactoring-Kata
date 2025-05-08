@@ -85,9 +85,7 @@ class BackstagePassHandler extends ItemHandler {
 }
 
 // Handler for Sulfuras, which doesn't change
-class SulfurasHandler extends ItemHandler {
-  updateQuality() {}
-}
+class SulfurasHandler extends ItemHandler {}
 
 class ConjuredItemHandler extends ItemHandler {
   updateQuality() {
