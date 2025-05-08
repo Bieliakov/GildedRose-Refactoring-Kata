@@ -1,5 +1,55 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Gilded Rose for Aged Brie increase quality if 1 day passes 1`] = `
+[
+  {
+    "name": "Aged Brie",
+    "quality": 1,
+    "sellIn": 1,
+  },
+  {
+    "name": "Aged Brie",
+    "quality": 11,
+    "sellIn": 2,
+  },
+  {
+    "name": "Aged Brie",
+    "quality": 31,
+    "sellIn": 9,
+  },
+  {
+    "name": "Aged Brie",
+    "quality": 31,
+    "sellIn": 29,
+  },
+]
+`;
+
+exports[`Gilded Rose for Aged Brie increase quality if 5 day passes 1`] = `
+[
+  {
+    "name": "Aged Brie",
+    "quality": 8,
+    "sellIn": -3,
+  },
+  {
+    "name": "Aged Brie",
+    "quality": 17,
+    "sellIn": -2,
+  },
+  {
+    "name": "Aged Brie",
+    "quality": 35,
+    "sellIn": 5,
+  },
+  {
+    "name": "Aged Brie",
+    "quality": 35,
+    "sellIn": 25,
+  },
+]
+`;
+
 exports[`Gilded Rose for normal items decrease quality if 1 day passes 1`] = `
 [
   {
@@ -86,51 +136,6 @@ exports[`Gilded Rose for normal items decrease quality if 5 day passes 1`] = `
     "name": "TAFKAL80ETC",
     "quality": 44,
     "sellIn": 0,
-  },
-]
-`;
-
-exports[`Gilded Rose for normal items decrease quality if item's maximum day passed 1`] = `
-[
-  {
-    "name": "test 1",
-    "quality": 0,
-    "sellIn": -5,
-  },
-  {
-    "name": "test 2",
-    "quality": 0,
-    "sellIn": -13,
-  },
-  {
-    "name": "test 3",
-    "quality": 0,
-    "sellIn": -10,
-  },
-  {
-    "name": "Sulfur",
-    "quality": 50,
-    "sellIn": -15,
-  },
-  {
-    "name": "Sulfur",
-    "quality": 50,
-    "sellIn": -16,
-  },
-  {
-    "name": "Backstage concert",
-    "quality": 5,
-    "sellIn": 0,
-  },
-  {
-    "name": "Test Backstage passes TAFKAL80ETC concert",
-    "quality": 29,
-    "sellIn": -5,
-  },
-  {
-    "name": "TAFKAL80ETC",
-    "quality": 24,
-    "sellIn": -10,
   },
 ]
 `;

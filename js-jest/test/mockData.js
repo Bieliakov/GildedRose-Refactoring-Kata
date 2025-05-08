@@ -9,4 +9,11 @@ const mockNomralItems = [
     { name: "TAFKAL80ETC", sellIn: 5, quality: 49 },
 ]
 
-module.exports = { mockNomralItems };
+const mockAgedBrieItems = [
+    { name: "Aged Brie", sellIn: 2, quality: 0 },
+    { name: "Aged Brie", sellIn: 3, quality: 10 },
+    { name: "Aged Brie", sellIn: 10, quality: 30 },
+    { name: "Aged Brie", sellIn: 30, quality: 30 },
+]
+
+module.exports = { mockNomralItems, mockAgedBrieItems };
