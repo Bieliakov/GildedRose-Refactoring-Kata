@@ -1,3 +1,5 @@
+const { ITEM_NAMES, QUALITY } = require('../src/constants');
+
 const mockNomralItems = [
     { name: "test 1", sellIn: 10, quality: 20 },
     { name: "test 2", sellIn: 2, quality: 0 },
@@ -10,16 +12,16 @@ const mockNomralItems = [
 ]
 
 const mockAgedBrieItems = [
-    { name: "Aged Brie", sellIn: 2, quality: 0 },
-    { name: "Aged Brie", sellIn: 3, quality: 10 },
-    { name: "Aged Brie", sellIn: 10, quality: 30 },
-    { name: "Aged Brie", sellIn: 30, quality: 30 },
+    { name: ITEM_NAMES.AGED_BRIE, sellIn: 2, quality: 0 },
+    { name: ITEM_NAMES.AGED_BRIE, sellIn: 3, quality: 10 },
+    { name: ITEM_NAMES.AGED_BRIE, sellIn: 10, quality: 30 },
+    { name: ITEM_NAMES.AGED_BRIE, sellIn: 30, quality: 30 },
 ]
 
 const mockBackstageItems = [
-    { name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 15, quality: 20 },
-    { name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 10, quality: 49 },
-    { name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 5, quality: 49 },
+    { name: ITEM_NAMES.BACKSTAGE_PASSES, sellIn: 15, quality: 20 },
+    { name: ITEM_NAMES.BACKSTAGE_PASSES, sellIn: 10, quality: 49 },
+    { name: ITEM_NAMES.BACKSTAGE_PASSES, sellIn: 5, quality: 49 },
 ]
 
 module.exports = { mockNomralItems, mockAgedBrieItems, mockBackstageItems };

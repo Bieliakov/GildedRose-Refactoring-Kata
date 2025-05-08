@@ -1,3 +1,5 @@
+const { ITEM_NAMES, QUALITY, SELLIN } = require('./constants');
+
 class Item {
   constructor(name, sellIn, quality){
     this.name = name;
@@ -16,7 +18,7 @@ class ItemHandler {
     this.updateQuality();
     this.updateSellIn();
     
-    if (this.item.sellIn < 0) {
+    if (this.item.sellIn < SELLIN.EXPIRED) {
       this.updateExpiredItemQuality();
     }
   }
@@ -31,14 +33,14 @@ class ItemHandler {
 
   // Utility methods for subclasses to use
   increaseQuality(amount = 1) {
-    if (this.item.quality < 50) {
-      this.item.quality = Math.min(50, this.item.quality + amount);
+    if (this.item.quality < QUALITY.MAX) {
+      this.item.quality = Math.min(QUALITY.MAX, this.item.quality + amount);
     }
   }
 
   decreaseQuality(amount = 1) {
-    if (this.item.quality > 0) {
-      this.item.quality = Math.max(0, this.item.quality - amount);
+    if (this.item.quality > QUALITY.MIN) {
+      this.item.quality = Math.max(QUALITY.MIN, this.item.quality - amount);
     }
   }
 }
@@ -68,25 +70,23 @@ class BackstagePassHandler extends ItemHandler {
   updateQuality() {
     this.increaseQuality(1);
     
-    if (this.item.sellIn < 11) {
+    if (this.item.sellIn <= SELLIN.BACKSTAGE_TIER_1) {
       this.increaseQuality(1);
     }
 
-    if (this.item.sellIn < 6) {
+    if (this.item.sellIn <= SELLIN.BACKSTAGE_TIER_2) {
       this.increaseQuality(1);
     }
   }
 
   updateExpiredItemQuality() {
-    this.item.quality = 0;
+    this.item.quality = QUALITY.MIN;
   }
 }
 
 // Handler for Sulfuras, which doesn't change
 class SulfurasHandler extends ItemHandler {
-  updateQuality() {
-    // Quality never changes for Sulfuras
-  }
+  updateQuality() {}
 }
 
 class ConjuredItemHandler extends ItemHandler {
@@ -114,16 +114,16 @@ class Shop {
   }
 
   createHandlerForItem(item) {
-    if (item.name === 'Aged Brie') {
+    if (item.name === ITEM_NAMES.AGED_BRIE) {
       return new AgedBrieHandler(item);
     }
-    if (item.name === 'Backstage passes to a TAFKAL80ETC concert') {
+    if (item.name === ITEM_NAMES.BACKSTAGE_PASSES) {
       return new BackstagePassHandler(item);
     }
-    if (item.name === 'Sulfuras, Hand of Ragnaros') {
+    if (item.name === ITEM_NAMES.SULFURAS) {
       return new SulfurasHandler(item);
     }
-    if (item.name.toLowerCase().includes('Conjured'.toLocaleLowerCase())) {
+    if (item.name.includes(ITEM_NAMES.CONJURED)) {
       return new ConjuredItemHandler(item);
     }
     return new NormalItemHandler(item);

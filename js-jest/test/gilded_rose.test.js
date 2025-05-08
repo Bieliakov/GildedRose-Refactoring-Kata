@@ -1,4 +1,5 @@
 const {Shop, Item} = require("../src/gilded_rose");
+const { ITEM_NAMES, QUALITY, SELLIN } = require('../src/constants');
 const { mockNomralItems, mockAgedBrieItems, mockBackstageItems } = require("./mockData");
 
 describe("Gilded Rose", function() {
@@ -20,9 +21,9 @@ describe("Gilded Rose", function() {
 
     
     it("quality not decreases below 0", function() {
-      gildedRose = new Shop([{ name: "test 1", sellIn: 0, quality: 0 }]);
+      gildedRose = new Shop([{ name: "test 1", sellIn: 0, quality: QUALITY.MIN }]);
       const items = gildedRose.updateQuality();
-      expect(items[0].quality).toBe(0);
+      expect(items[0].quality).toBe(QUALITY.MIN);
     });
 
     it("if 1 day passes", function() {
@@ -67,7 +68,7 @@ describe("Gilded Rose", function() {
       gildedRose = new Shop(mockAgedBrieItemsCopy);
     });
     it("for one item", function() {
-      gildedRose = new Shop([{ name: "Aged Brie", sellIn: 5, quality: 30 }]);
+      gildedRose = new Shop([{ name: ITEM_NAMES.AGED_BRIE, sellIn: 5, quality: 30 }]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(4);
       expect(items[0].quality).toBe(31);
@@ -94,7 +95,7 @@ describe("Gilded Rose", function() {
         items = gildedRose.updateQuality();
       }
 
-      expect(items.reduce((max, item) => Math.max(max, item.quality), 0)).toBeLessThanOrEqual(50);
+      expect(items.reduce((max, item) => Math.max(max, item.quality), 0)).toBeLessThanOrEqual(QUALITY.MAX);
     });
   });
 
@@ -102,13 +103,12 @@ describe("Gilded Rose", function() {
     let gildedRose = null;
 
     beforeEach(() => {
-      gildedRose = new Shop([{ name: "Sulfuras, Hand of Ragnaros", sellIn: 1, quality: 80 }]);
+      gildedRose = new Shop([{ name: ITEM_NAMES.SULFURAS, sellIn: 1, quality: QUALITY.LEGENDARY }]);
     });
 
     it("quality will not change", function() {
       const items = gildedRose.updateQuality();
-      expect(items[0].sellIn).toBe(0);
-      expect(items[0].quality).toBe(80);
+      expect(items[0].quality).toBe(QUALITY.LEGENDARY);
     });
   });
 
@@ -122,42 +122,42 @@ describe("Gilded Rose", function() {
     });
 
     it("if more then 10 days left normal increase in quality", function() {
-      gildedRose = new Shop([{ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 11, quality: 20 }]);
+      gildedRose = new Shop([{ name: ITEM_NAMES.BACKSTAGE_PASSES, sellIn: 11, quality: 20 }]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(10);
       expect(items[0].quality).toBe(21);
     });
 
     it("if 10 days left double increase in quality", function() {
-      gildedRose = new Shop([{ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 10, quality: 20 }]);
+      gildedRose = new Shop([{ name: ITEM_NAMES.BACKSTAGE_PASSES, sellIn: SELLIN.BACKSTAGE_TIER_1, quality: 20 }]);
       const items = gildedRose.updateQuality();
 
       expect(items[0].quality).toBe(22);
     });
 
     it("if 6 days left double increase in quality", function() {
-      gildedRose = new Shop([{ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 6, quality: 20 }]);
+      gildedRose = new Shop([{ name: ITEM_NAMES.BACKSTAGE_PASSES, sellIn: 6, quality: 20 }]);
       const items = gildedRose.updateQuality();
 
       expect(items[0].quality).toBe(22);
     });
 
     it("if 5 days left triple increase in quality", function() {
-      gildedRose = new Shop([{ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 5, quality: 20 }]);
+      gildedRose = new Shop([{ name: ITEM_NAMES.BACKSTAGE_PASSES, sellIn: SELLIN.BACKSTAGE_TIER_2, quality: 20 }]);
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toBe(23);
     });
 
     it("if 1 days left triple increase in quality", function() {
-      gildedRose = new Shop([{ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 1, quality: 20 }]);
+      gildedRose = new Shop([{ name: ITEM_NAMES.BACKSTAGE_PASSES, sellIn: 1, quality: 20 }]);
       const items = gildedRose.updateQuality();
       expect(items[0].quality).toBe(23);
     });
 
-    it("if 0 or less days left  value drops to 0", function() {
-      gildedRose = new Shop([{ name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 0, quality: 20 }]);
+    it("if 0 or less days left value drops to 0", function() {
+      gildedRose = new Shop([{ name: ITEM_NAMES.BACKSTAGE_PASSES, sellIn: SELLIN.EXPIRED, quality: 20 }]);
       const items = gildedRose.updateQuality();
-      expect(items[0].quality).toBe(0);
+      expect(items[0].quality).toBe(QUALITY.MIN);
     });
 
     it("but quality will be no more 50", function() {
@@ -168,13 +168,13 @@ describe("Gilded Rose", function() {
         items = gildedRose.updateQuality();
       }
 
-      expect(items.reduce((max, item) => Math.max(max, item.quality), 0)).toBeLessThanOrEqual(50);
+      expect(items.reduce((max, item) => Math.max(max, item.quality), 0)).toBeLessThanOrEqual(QUALITY.MAX);
     });
   });
 
   describe("for conjured items ", function() {
     it("double decrease quality", function() {
-      const gildedRose = new Shop([{ name: "Conjured Mana Cake", sellIn: 3, quality: 6 }]);
+      const gildedRose = new Shop([{ name: ITEM_NAMES.CONJURED + " Mana Cake", sellIn: 3, quality: 6 }]);
       const items = gildedRose.updateQuality();
       expect(items[0].sellIn).toBe(2);
       expect(items[0].quality).toBe(4);
@@ -182,9 +182,9 @@ describe("Gilded Rose", function() {
 
     
     it("quality not decreases below 0", function() {
-      const gildedRose = new Shop([{ name: "Conjured Mana Cake", sellIn: 2, quality: 1 }]);
+      const gildedRose = new Shop([{ name: ITEM_NAMES.CONJURED + " Mana Cake", sellIn: 2, quality: 1 }]);
       const items = gildedRose.updateQuality();
-      expect(items[0].quality).toBe(0);
+      expect(items[0].quality).toBe(QUALITY.MIN);
     });
   });
 });
