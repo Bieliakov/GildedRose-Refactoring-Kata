@@ -1,7 +1,7 @@
 
 const { Shop, Item } = require("../src/gilded_rose");
 
-const items = [
+export const items = [
   new Item("+5 Dexterity Vest", 10, 20),
   new Item("Aged Brie", 2, 0),
   new Item("Elixir of the Mongoose", 5, 7),

@@ -1,9 +1,12 @@
 const {Shop, Item} = require("../src/gilded_rose");
+const { mockNomralItems } = require("./mockData");
 
 describe("Gilded Rose", function() {
-  it("should foo", function() {
-    const gildedRose = new Shop([new Item("foo", 0, 0)]);
-    const items = gildedRose.updateQuality();
-    expect(items[0].name).toBe("fixme");
+  describe("for normal items", function() {
+    it("properly decrease quality if 1 day passes", function() {
+      const gildedRose = new Shop(mockNomralItems);
+      const items = gildedRose.updateQuality();
+      expect(items).toMatchSnapshot();
+    });
   });
 });

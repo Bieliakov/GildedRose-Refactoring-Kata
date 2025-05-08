@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Gilded Rose for normal items properly decrease quality if 1 day passes 1`] = `
+[
+  {
+    "name": "test 1",
+    "quality": 19,
+    "sellIn": 9,
+  },
+  {
+    "name": "test 2",
+    "quality": 0,
+    "sellIn": 1,
+  },
+  {
+    "name": "test 3",
+    "quality": 6,
+    "sellIn": 4,
+  },
+  {
+    "name": "Sulfur",
+    "quality": 78,
+    "sellIn": -1,
+  },
+  {
+    "name": "Sulfur",
+    "quality": 78,
+    "sellIn": -2,
+  },
+  {
+    "name": "Backstage concert",
+    "quality": 19,
+    "sellIn": 14,
+  },
+  {
+    "name": "Test Backstage passes TAFKAL80ETC concert",
+    "quality": 48,
+    "sellIn": 9,
+  },
+  {
+    "name": "TAFKAL80ETC",
+    "quality": 48,
+    "sellIn": 4,
+  },
+]
+`;
