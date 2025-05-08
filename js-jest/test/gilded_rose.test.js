@@ -172,7 +172,7 @@ describe("Gilded Rose", function() {
     });
   });
 
-  describe.skip("for conjured items ", function() {
+  describe("for conjured items ", function() {
     it("double decrease quality", function() {
       const gildedRose = new Shop([{ name: "Conjured Mana Cake", sellIn: 3, quality: 6 }]);
       const items = gildedRose.updateQuality();

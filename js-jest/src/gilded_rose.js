@@ -6,7 +6,7 @@ class Item {
   }
 }
 
-// Base item handler with common logic
+// Simplified base ItemHandler with minimal shared logic
 class ItemHandler {
   constructor(item) {
     this.item = item;
@@ -18,20 +18,16 @@ class ItemHandler {
     this.updateQualityAfterExpired();
   }
 
-  updateQuality() {
-    this.decreaseQuality(1);
-  }
-
+  // Default implementations - subclasses can override as needed
+  updateQuality() {}
+  
   updateSellIn() {
     this.item.sellIn -= 1;
   }
+  
+  updateQualityAfterExpired() {}
 
-  updateQualityAfterExpired() {
-    if (this.item.sellIn < 0) {
-      this.decreaseQuality(1);
-    }
-  }
-
+  // Utility methods for subclasses to use
   increaseQuality(amount = 1) {
     if (this.item.quality < 50) {
       this.item.quality = Math.min(50, this.item.quality + amount);
@@ -45,7 +41,19 @@ class ItemHandler {
   }
 }
 
-// Handler for Aged Brie
+// Handler for normal items
+class NormalItemHandler extends ItemHandler {
+  updateQuality() {
+    this.decreaseQuality(1);
+  }
+
+  updateQualityAfterExpired() {
+    if (this.item.sellIn < 0) {
+      this.decreaseQuality(1);
+    }
+  }
+}
+
 class AgedBrieHandler extends ItemHandler {
   updateQuality() {
     this.increaseQuality(1);
@@ -58,7 +66,6 @@ class AgedBrieHandler extends ItemHandler {
   }
 }
 
-// Handler for Backstage passes
 class BackstagePassHandler extends ItemHandler {
   updateQuality() {
     this.increaseQuality(1);
@@ -80,21 +87,8 @@ class BackstagePassHandler extends ItemHandler {
 }
 
 // Handler for Sulfuras, which doesn't change
-class SulfurasHandler extends ItemHandler {
-  updateQuality() {
-    // Quality doesn't change
-  }
+class SulfurasHandler extends ItemHandler {}
 
-  updateSellIn() {
-    // Sell-in doesn't change
-  }
-
-  updateQualityAfterExpired() {
-    // Nothing happens after expiry
-  }
-}
-
-// Handler for Conjured items
 class ConjuredItemHandler extends ItemHandler {
   updateQuality() {
     this.decreaseQuality(2);
@@ -134,7 +128,7 @@ class Shop {
     if (item.name.includes('Conjured')) {
       return new ConjuredItemHandler(item);
     }
-    return new ItemHandler(item);
+    return new NormalItemHandler(item);
   }
 }
 
