@@ -16,4 +16,10 @@ const mockAgedBrieItems = [
     { name: "Aged Brie", sellIn: 30, quality: 30 },
 ]
 
-module.exports = { mockNomralItems, mockAgedBrieItems };
+const mockBackstageItems = [
+    { name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 15, quality: 20 },
+    { name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 10, quality: 49 },
+    { name: "Backstage passes to a TAFKAL80ETC concert", sellIn: 5, quality: 49 },
+]
+
+module.exports = { mockNomralItems, mockAgedBrieItems, mockBackstageItems };
